@@ -23,7 +23,7 @@ export const getAllAssets = createAsyncThunk<Asset[], void>(
 export const getAssetsByRegion = createAsyncThunk<Asset[], string>(
   'assets/getAssetsByRegion',
   async (region: string) => {
-    return region || [];
+    return region as unknown as Asset[] || [];
   }
 );
 
