@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import assetsReducer from './reducers/assets';
+import {assetsReducer} from '../redux/reducers/assets';
 
 export const store = configureStore({
   reducer: {
-    assets: assetsReducer,
+    assetData: assetsReducer,
   },
 });
 

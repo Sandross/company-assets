@@ -1,0 +1,60 @@
+.assetsBar {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .tree {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .treeItem {
+    margin-left: 20px;
+  }
+  
+  .treeLabel {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  
+    &:hover {
+      background-color: #e6f7ff;
+    }
+  }
+  
+  .icon {
+    margin-right: 8px;
+  }
+  
+  .itemName {
+    flex-grow: 1;
+  }
+  
+  .statusIndicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 8px;
+    
+    &.operating {
+      background-color: green;
+    }
+  
+    &.warning {
+      background-color: yellow;
+    }
+  
+    &.critical {
+      background-color: red;
+    }
+  }
+  
