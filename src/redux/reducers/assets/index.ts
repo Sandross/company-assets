@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Asset, AssetsState, Company } from '../../../interfaces';
+import { Asset, AssetsState, Company, Location } from '../../../interfaces';
 import { fetchAssetsByCompanyId, fetchCompanies, fetchLocationsByCompanyId } from '../../slices';
+import { applyFilters } from '../../../utils';
 
 const initialState: AssetsState = {
   companies: [],
   locations: [],
   assets: [],
+  filteredAssets: [],
+  searchQuery: '',
+  filterByEnergySensors: false,
+  filterByCriticalStatus: false,
   loading: false,
   error: null,
 };
@@ -13,7 +18,20 @@ const initialState: AssetsState = {
 const assetsSlice = createSlice({
   name: 'assetData',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchQuery: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload;
+      applyFilters(state);
+    },
+    toggleEnergySensorsFilter: (state) => {
+      state.filterByEnergySensors = !state.filterByEnergySensors;
+      applyFilters(state);
+    },
+    toggleCriticalStatusFilter: (state) => {
+      state.filterByCriticalStatus = !state.filterByCriticalStatus;
+      applyFilters(state);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCompanies.pending, (state) => {
@@ -32,9 +50,9 @@ const assetsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+      //@ts-expect-error state
       .addCase(fetchLocationsByCompanyId.fulfilled, (state, action: PayloadAction<Location[]>) => {
         state.loading = false;
-        //@ts-expect-error state
         state.locations = action.payload;
       })
       .addCase(fetchLocationsByCompanyId.rejected, (state, action) => {
@@ -48,6 +66,7 @@ const assetsSlice = createSlice({
       .addCase(fetchAssetsByCompanyId.fulfilled, (state, action: PayloadAction<Asset[]>) => {
         state.loading = false;
         state.assets = action.payload;
+        applyFilters(state);
       })
       .addCase(fetchAssetsByCompanyId.rejected, (state, action) => {
         state.loading = false;
@@ -56,4 +75,5 @@ const assetsSlice = createSlice({
   },
 });
 
+export const { setSearchQuery, toggleEnergySensorsFilter, toggleCriticalStatusFilter } = assetsSlice.actions;
 export const assetsReducer = assetsSlice.reducer;

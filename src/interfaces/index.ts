@@ -10,11 +10,14 @@ export interface Location {
   }
   
 export interface Asset {
+    gateWayId: string;
     id: string;
     name: string;
     parentId: string | null;
+    sensorId: string;
     locationId: string | null;
     sensorType?: string;
+    status?: string;
   }
   
 export interface AssetsState {
@@ -23,6 +26,10 @@ export interface AssetsState {
     assets: Asset[];
     loading: boolean;
     error: string | null;
+    filteredAssets: Asset[];
+    searchQuery: string;
+    filterByEnergySensors: boolean;
+    filterByCriticalStatus: boolean;
   }
   
 export interface IRenderTreeItem{
