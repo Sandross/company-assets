@@ -32,3 +32,13 @@ export interface IRenderTreeItem{
     locationId?: string | null;
     sensorType?: string | null;
   }
+
+export interface IAssetImageObject{
+    asset: string;
+    component: string;
+    location: string;
+}
+
+export interface ISearchInputProps {
+    searchedValue: string;
+}
