@@ -1,10 +1,16 @@
 import React from 'react';
+import Header from '../header/input';
 import styles from './style.module.scss';
 
-const Layout: React.FC = () => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className={styles.layoutContainer}>
-      {/* Conteúdo do Layout */}
+      <Header />
+      <main>{children}</main>
     </div>
   );
 };

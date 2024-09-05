@@ -15,7 +15,7 @@ export const SearchInput = ({ searchedValue }: ISearchInputProps) => {
     dispatch(setSearchQuery(debouncedValue));
   }, [debouncedValue, dispatch]);
 
-  const handleEnergyFilterToggle = () => {
+  const handleEnergyFilterToggle = () => { 
     setFilterEnergy(!filterEnergy);
     dispatch(toggleEnergySensorsFilter());
   };

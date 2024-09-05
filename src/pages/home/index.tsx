@@ -1,11 +1,11 @@
 import React from 'react';
 import AssetsBar from '../../components/assetsBar';
+import Layout from '../../components/layout';
 const Home: React.FC = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <Layout>
       <AssetsBar />
-    </div>
+    </Layout>
   );
 };
 
