@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCompanies, fetchLocationsByCompanyId, fetchAssetsByCompanyId } from '../../redux/slices';
 import { RootState, AppDispatch } from '../../redux';
@@ -6,10 +6,18 @@ import styles from './style.module.scss';
 import { IRenderTreeItem } from '../../interfaces';
 import { AssetsImageObject } from '../../utils';
 import { SearchInput } from '../searchInput';
+import AssetTable from '../assetTable';
+
+const ITEMS_PER_PAGE = 10;
 
 export const AssetsBar: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { companies, locations, filteredAssets, loading, error } = useSelector((state: RootState) => state.assetData);
+  const { companies, locations, filteredAssets, loading, error, selectedCompanyId } = useSelector(
+    (state: RootState) => state.assetData
+  );
+
+  const [expandedNodes, setExpandedNodes] = useState<{ [key: string]: boolean }>({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(fetchCompanies());
@@ -18,59 +26,140 @@ export const AssetsBar: React.FC = () => {
   useEffect(() => {
     if (companies.length > 0) {
       const companyId = companies[0].id;
-      dispatch(fetchLocationsByCompanyId(companyId));
-      dispatch(fetchAssetsByCompanyId(companyId));
+      dispatch(fetchLocationsByCompanyId(selectedCompanyId || companyId));
+      dispatch(fetchAssetsByCompanyId(selectedCompanyId || companyId));
     }
-  }, [companies, dispatch]);
+  }, [companies, dispatch, selectedCompanyId]);
 
-  const renderTree = useCallback(
-    (items: Partial<IRenderTreeItem[]>, type: string, parentId?: string | null) => {
-      return items
-        ?.filter((item) =>
-          type === 'location'
-            ? item?.parentId === parentId
-            : item?.locationId === parentId || item?.parentId === parentId
-        )
-        ?.map((item) => (
-          <li key={item?.id} className={styles.treeItem}>
-            <div className={styles.treeLabel}>
-              <span className={styles.icon}>
-                <img src={AssetsImageObject[type as keyof typeof AssetsImageObject]} alt={type} />
-              </span>
-              {item?.name}
-            </div>
-            <ul className={styles.treeChildren}>
-              {type === 'location'
-                ? renderTree(locations, 'location', item?.id)
-                : renderTree(filteredAssets, 'asset', item?.id)}
-            </ul>
-          </li>
-        ));
+  const toggleNode = (nodeId: string) => {
+    setExpandedNodes((prev) => ({
+      ...prev,
+      [nodeId]: !prev[nodeId],
+    }));
+  };
+
+  const getPaginatedItems = useCallback(
+    (items: IRenderTreeItem[]) => {
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      return items.slice(startIndex, endIndex);
     },
-    [locations, filteredAssets]
+    [currentPage]
   );
 
-  const filteredTree = useMemo(() => {
-    return (
-      <>
-        {renderTree(locations, 'location', null)}
-        {renderTree(filteredAssets, 'asset', null)}
-      </>
-    );
-  }, [locations, filteredAssets, renderTree]);
+  const rootLocations = useMemo(
+    () => locations?.filter((location) => !location.parentId),
+    [locations]
+  );
+
+  const renderAssetTree = useCallback(
+    (locationId: string | null, parentAssetId?: string | null) => {
+      const assetItems = filteredAssets?.filter((asset) => asset.locationId === locationId || asset.parentId === parentAssetId);
+      return assetItems?.map((asset) => {
+        const isExpanded = expandedNodes[asset.id];
+        const hasChildren = filteredAssets?.some((child) => child.parentId === asset.id);
+        return (
+          <li key={asset.id} className={styles.treeItem}>
+            <div className={styles.treeLabel} onClick={() => toggleNode(asset.id)}>
+              <span className={styles.icon}>
+                {asset.sensorType ? (
+                  <img src={AssetsImageObject['component']} alt="Component" />
+                ) : (
+                  <img src={AssetsImageObject['asset']} alt="Asset" />
+                )}
+              </span>
+              {asset.name}
+            </div>
+  
+            {isExpanded && hasChildren && (
+              <ul className={styles.treeChildren}>
+                {renderAssetTree(null, asset.id)}
+              </ul>
+            )}
+          </li>
+        );
+      });
+    },
+    [filteredAssets, expandedNodes, toggleNode]
+  );
+  const renderLocationTree = useCallback(
+    (parentLocationId: string | null) => {
+      const locationItems = locations?.filter((location) => location.parentId === parentLocationId);
+      return locationItems?.map((location) => {
+        const isExpanded = expandedNodes[location.id];
+        return (
+          <li key={location.id} className={styles.treeItem}>
+            <div className={styles.treeLabel} onClick={() => toggleNode(location.id)}>
+              <span className={styles.icon}>
+                <img src={AssetsImageObject['location']} alt="Location" />
+              </span>
+              {location.name}
+            </div>
+  
+            {isExpanded && (
+              <ul className={styles.treeChildren}>
+                {renderLocationTree(location?.id)}
+                {renderAssetTree(location?.id)}
+              </ul>
+            )}
+          </li>
+        );
+      });
+    },
+    [locations, expandedNodes, toggleNode, renderAssetTree]
+  );
+
+  const totalPages = Math.ceil(rootLocations.length / ITEMS_PER_PAGE);
+  const paginatedLocations = useMemo(() => getPaginatedItems(rootLocations), [rootLocations, getPaginatedItems]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   if (loading) return <div className={styles.loading}>Loading...</div>;
   if (error) return <div className={styles.error}>{String(error)}</div>;
 
   return (
     <div className={styles.assetsBar}>
-      <h2 className={styles.title}>Assets</h2>
-
-      <SearchInput searchedValue="" />
-
-      <ul className={styles.tree}>{filteredTree}</ul>
+      <div className={styles.tree}>
+        <h2 className={styles.title}>Ativos</h2>
+        <SearchInput searchedValue="" />
+  
+        <ul className={styles.tree}>
+          {paginatedLocations?.map((location) => (
+            <li key={location.id} className={styles.treeItem}>
+              <div className={styles.treeLabel} onClick={() => toggleNode(location.id)}>
+                <span className={styles.icon}>
+                  <img src={AssetsImageObject['location']} alt="Location" />
+                </span>
+                {location.name}
+              </div>
+  
+              {expandedNodes[location.id] && (
+                <ul className={styles.treeChildren}>
+                  {renderLocationTree(location.id)}
+                  {renderAssetTree(location.id)}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+  
+        <div className={styles.pagination}>
+          <button onClick={() => handlePageChange(Math.max(currentPage - 1, 1))} disabled={currentPage === 1}>
+          Previous Page
+          </button>
+          <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+          Next Page
+          </button>
+        </div>
+      </div>
+      <div className={styles.table}>
+        <AssetTable/>
+      </div>
     </div>
   );
+  
 };
 
 export default AssetsBar;

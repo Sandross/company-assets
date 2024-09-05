@@ -30,6 +30,7 @@ export interface AssetsState {
     searchQuery: string;
     filterByEnergySensors: boolean;
     filterByCriticalStatus: boolean;
+    selectedCompanyId: string | null;
   }
   
 export interface IRenderTreeItem{

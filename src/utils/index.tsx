@@ -1,15 +1,14 @@
-import { Asset, AssetsState, IAssetImageObject } from '../interfaces';
+import { Asset, AssetsState } from '../interfaces';
 import asset from '../assets/asset.png';
 import component from '../assets/component.png';
 import location from '../assets/location.png';
 
 
-export const AssetsImageObject: IAssetImageObject = { 
+export const AssetsImageObject: Record<string, string> = {
   'asset': asset,
   'component': component,
-  'location': location 
+  'location': location,
 };
-
 export const applyFilters = (state: AssetsState) => {
   let filteredAssets = state.assets;
   
@@ -27,14 +26,19 @@ export const applyFilters = (state: AssetsState) => {
     filteredAssets = filteredAssets.filter((asset) => asset.status === 'critical');
   }
   
-  filteredAssets = filteredAssets.filter((asset) => isInAssetPath(asset, filteredAssets, state.assets));
+  const resultAssets = new Set(filteredAssets);
   
-  state.filteredAssets = filteredAssets;
+  filteredAssets.forEach((asset) => {
+    addParentsToResult(asset, state.assets, resultAssets);
+  });
+  
+  state.filteredAssets = Array.from(resultAssets);
 };
   
-export const isInAssetPath = (asset: Asset, filteredAssets: Asset[], allAssets: Asset[]): boolean => {
-  if (filteredAssets.includes(asset)) return true;
-  
-  const parent = allAssets.find((a) => a.id === asset.parentId);
-  return parent ? isInAssetPath(parent, filteredAssets, allAssets) : false;
+const addParentsToResult = (asset: Asset, allAssets: Asset[], resultAssets: Set<Asset>) => {
+  const parent = allAssets.find((a) => a.id === asset.parentId || a.id === asset.locationId);
+  if (parent && !resultAssets.has(parent)) {
+    resultAssets.add(parent);
+    addParentsToResult(parent, allAssets, resultAssets);
+  }
 };

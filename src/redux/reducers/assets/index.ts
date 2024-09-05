@@ -13,6 +13,7 @@ const initialState: AssetsState = {
   filterByCriticalStatus: false,
   loading: false,
   error: null,
+  selectedCompanyId: null,
 };
 
 const assetsSlice = createSlice({
@@ -30,6 +31,9 @@ const assetsSlice = createSlice({
     toggleCriticalStatusFilter: (state) => {
       state.filterByCriticalStatus = !state.filterByCriticalStatus;
       applyFilters(state);
+    },
+    setSelectedCompanyId: (state, action: PayloadAction<string | null>) => {
+      state.selectedCompanyId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -75,5 +79,5 @@ const assetsSlice = createSlice({
   },
 });
 
-export const { setSearchQuery, toggleEnergySensorsFilter, toggleCriticalStatusFilter } = assetsSlice.actions;
+export const { setSearchQuery, toggleEnergySensorsFilter, toggleCriticalStatusFilter, setSelectedCompanyId } = assetsSlice.actions;
 export const assetsReducer = assetsSlice.reducer;
