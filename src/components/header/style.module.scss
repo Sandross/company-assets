@@ -1,4 +1,3 @@
-// style.module.scss
 @import "../../styles/mixins";
 
 .container {
@@ -6,6 +5,7 @@
   @include flexAlignment(row, space-between, center);
   background-color: #17192d;
   padding: 1rem 2rem;
+  margin-bottom: 1.1rem;
   .container-logo {
     max-height: 40px;
 }

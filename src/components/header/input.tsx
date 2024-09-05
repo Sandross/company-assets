@@ -10,7 +10,6 @@ const Header: React.FC = () => {
   const { companies, selectedCompanyId } = useSelector((state: RootState) => state.assetData);
 
   useEffect(() => {
-    console.log(companies);
     dispatch(setSelectedCompanyId(companies[0]?.id));
   }, [companies]);
 

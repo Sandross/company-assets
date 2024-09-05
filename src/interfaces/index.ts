@@ -50,3 +50,7 @@ export interface IAssetImageObject{
 export interface ISearchInputProps {
     searchedValue: string;
 }
+
+export interface IAssetTableProps {
+    selectedNode: IRenderTreeItem | null;
+}

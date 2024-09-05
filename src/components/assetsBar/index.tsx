@@ -7,6 +7,7 @@ import { IRenderTreeItem } from '../../interfaces';
 import { AssetsImageObject } from '../../utils';
 import { SearchInput } from '../searchInput';
 import AssetTable from '../assetTable';
+import { Loading } from '../loading';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -16,8 +17,10 @@ export const AssetsBar: React.FC = () => {
     (state: RootState) => state.assetData
   );
 
+  const [selectedNode, setSelectedNode] = useState<IRenderTreeItem | null>(null);
   const [expandedNodes, setExpandedNodes] = useState<{ [key: string]: boolean }>({});
   const [currentPage, setCurrentPage] = useState(1);
+  const currCompanyName = companies?.filter((e) => e.id === selectedCompanyId)[0]?.name;
 
   useEffect(() => {
     dispatch(fetchCompanies());
@@ -31,11 +34,12 @@ export const AssetsBar: React.FC = () => {
     }
   }, [companies, dispatch, selectedCompanyId]);
 
-  const toggleNode = (nodeId: string) => {
+  const toggleNode = (nodeId: string, nodeData: IRenderTreeItem) => {
     setExpandedNodes((prev) => ({
       ...prev,
       [nodeId]: !prev[nodeId],
     }));
+    setSelectedNode(nodeData);
   };
 
   const getPaginatedItems = useCallback(
@@ -60,7 +64,7 @@ export const AssetsBar: React.FC = () => {
         const hasChildren = filteredAssets?.some((child) => child.parentId === asset.id);
         return (
           <li key={asset.id} className={styles.treeItem}>
-            <div className={styles.treeLabel} onClick={() => toggleNode(asset.id)}>
+            <div className={styles.treeLabel} onClick={() => toggleNode(asset.id, asset)}>
               <span className={styles.icon}>
                 {asset.sensorType ? (
                   <img src={AssetsImageObject['component']} alt="Component" />
@@ -82,6 +86,7 @@ export const AssetsBar: React.FC = () => {
     },
     [filteredAssets, expandedNodes, toggleNode]
   );
+  
   const renderLocationTree = useCallback(
     (parentLocationId: string | null) => {
       const locationItems = locations?.filter((location) => location.parentId === parentLocationId);
@@ -89,7 +94,7 @@ export const AssetsBar: React.FC = () => {
         const isExpanded = expandedNodes[location.id];
         return (
           <li key={location.id} className={styles.treeItem}>
-            <div className={styles.treeLabel} onClick={() => toggleNode(location.id)}>
+            <div className={styles.treeLabel} onClick={() => toggleNode(location.id, location)}>
               <span className={styles.icon}>
                 <img src={AssetsImageObject['location']} alt="Location" />
               </span>
@@ -116,19 +121,20 @@ export const AssetsBar: React.FC = () => {
     setCurrentPage(newPage);
   };
 
-  if (loading) return <div className={styles.loading}>Loading...</div>;
+  if (loading) return <Loading/>;
   if (error) return <div className={styles.error}>{String(error)}</div>;
 
   return (
     <div className={styles.assetsBar}>
       <div className={styles.tree}>
-        <h2 className={styles.title}>Ativos</h2>
+        <h2 className={styles.title}>Ativos/</h2>
+        <span>{currCompanyName}</span>
         <SearchInput searchedValue="" />
   
         <ul className={styles.tree}>
           {paginatedLocations?.map((location) => (
             <li key={location.id} className={styles.treeItem}>
-              <div className={styles.treeLabel} onClick={() => toggleNode(location.id)}>
+              <div className={styles.treeLabel} onClick={() => toggleNode(location.id, location)}>
                 <span className={styles.icon}>
                   <img src={AssetsImageObject['location']} alt="Location" />
                 </span>
@@ -147,19 +153,18 @@ export const AssetsBar: React.FC = () => {
   
         <div className={styles.pagination}>
           <button onClick={() => handlePageChange(Math.max(currentPage - 1, 1))} disabled={currentPage === 1}>
-          Previous Page
+            Previous Page
           </button>
           <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next Page
+            Next Page
           </button>
         </div>
       </div>
       <div className={styles.table}>
-        <AssetTable/>
+        <AssetTable selectedNode={selectedNode} />
       </div>
     </div>
   );
-  
 };
 
 export default AssetsBar;
