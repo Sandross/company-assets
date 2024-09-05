@@ -54,3 +54,7 @@ export interface ISearchInputProps {
 export interface IAssetTableProps {
     selectedNode: IRenderTreeItem | null;
 }
+
+export interface IErrorProps {
+    message: string;
+}

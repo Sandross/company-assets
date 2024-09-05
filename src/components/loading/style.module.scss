@@ -10,7 +10,7 @@
   }
   
   .loadingContainer {
-    @include flexAlignment;
+    @include flexAlignment(column);
     position: fixed;
     top: 0;
     left: 0;

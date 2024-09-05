@@ -7,7 +7,8 @@ import { IRenderTreeItem } from '../../interfaces';
 import { AssetsImageObject } from '../../utils';
 import { SearchInput } from '../searchInput';
 import AssetTable from '../assetTable';
-import { Loading } from '../loading';
+import Loading from '../loading';
+import Error from '../error';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -122,7 +123,7 @@ export const AssetsBar: React.FC = () => {
   };
 
   if (loading) return <Loading/>;
-  if (error) return <div className={styles.error}>{String(error)}</div>;
+  if (error) return <Error message={error} />;
 
   return (
     <div className={styles.assetsBar}>
