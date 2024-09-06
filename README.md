@@ -41,7 +41,10 @@ O deploy da aplicação foi feito utilizando o **AWS Amplify**, que facilita a i
 
 A aplicação está disponível neste link: [Acessar aplicação](https://main.d2lkjvhvc510nq.amplifyapp.com/).
 
+### 10. **Paginação Customizada para Melhorar a Performance**
+Implementei um sistema de paginação customizada para melhorar a performance nas requisições e na renderização de grandes volumes de dados. A paginação divide as requisições em blocos menores, permitindo que a API envie apenas as informações necessárias para cada página. Dessa forma, reduzo o tempo de carregamento e evito sobrecarregar a interface com dados desnecessários, otimizando a experiência do usuário.
+
 ## Instalação e Configuração
-1. Clone o repositório: git clone https://github.com/Sandross/tractian-company-assets.git
-2. Instale as dependências: npm install
-3. Execute a aplicação: npm run dev
+1. Clone o repositório: `git clone https://github.com/Sandross/tractian-company-assets.git`
+2. Instale as dependências: `npm install`
+3. Execute a aplicação: `npm run dev`
