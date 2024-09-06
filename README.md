@@ -7,7 +7,7 @@ Este projeto, chamado **Tractian Company Assets**, foi desenvolvido para otimiza
 ## Ferramentas e Tecnologias Utilizadas
 
 ### 1. **Husky com Commitlint e Lint-Staged**
-Implementei o **Husky** para automatizar hooks do Git, como `pre-commit` e `pre-push`, garantindo a execução de scripts de linting antes de cada commit. Além disso:
+Implementei o **Husky** para automatizar hooks do Git, como `pre-commit`, garantindo a execução de scripts de linting antes de cada commit. Além disso:
 
 - **Commitlint**: Assegura que as mensagens de commit sigam o padrão **Conventional Commits**, garantindo consistência no histórico de commits.
 - **Lint-Staged**: Faz o linting apenas dos arquivos modificados, melhorando a eficiência nas verificações de código.
