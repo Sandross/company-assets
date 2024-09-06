@@ -37,7 +37,7 @@ Implementei uma classe **ErrorBoundary** para capturar erros que não são trata
 Utilizei os hooks **useMemo** e **useCallback** para otimizar a renderização de componentes, evitando cálculos e recriações desnecessárias de funções em cada renderização. Isso melhora a performance, especialmente em componentes que realizam operações pesadas ou dependem de callbacks constantes.
 
 ### 9. **AWS**
-O deploy da aplicação foi feito utilizando o **AWS Amplify**, que facilita a implementação contínua e integrações com serviços AWS. Utilizei **GitHub Actions** para automatizar o processo de CI/CD (Integração e Entrega Contínuas), garantindo uma pipeline de deploy confiável e eficiente.
+O deploy da aplicação foi feito utilizando o **AWS Amplify**, que facilita a implementação contínua e integrações com serviços AWS, além de automatizar o processo de CI/CD (Integração e Entrega Contínuas), garantindo uma pipeline de deploy confiável e eficiente.
 
 A aplicação está disponível neste link: [Acessar aplicação](https://main.d2lkjvhvc510nq.amplifyapp.com/).
 
