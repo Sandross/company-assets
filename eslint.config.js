@@ -18,8 +18,8 @@ export default [
     rules: {
         'indent': ['error', 2],
         'quotes': ['error', 'single'],
-        'semi': ['error', 'always'],
-      },
+        'semi': ['error', 'always']
+    },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
