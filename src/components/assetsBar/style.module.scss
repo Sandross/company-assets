@@ -1,3 +1,4 @@
+@import '../../styles/mixins';
 .assetsBar {
     display: flex;
     flex-direction: row;
@@ -179,8 +180,7 @@
     }
 
     .assetDetails {
-        display: flex;
-        flex-direction: column;
+        @include flexAlignment(column, flex-start, flex-start);
         gap: 10px;
         background-color: #f8f9fc;
         padding: 10px;
@@ -188,9 +188,7 @@
         color: #343a40;
 
         .detailItem {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @include flexAlignment(row, center, space-between)
         }
     }
 
@@ -205,5 +203,15 @@
         width: 100%;
         height: auto;
         object-fit: cover;
+    }
+
+    .textContainer {
+        @include flexAlignment(row, flex-start, flex-start);
+
+       h3{
+            color: 'grey';
+            opacity: 0.5;
+            margin-left: 0.5rem;
+       }
     }
 }

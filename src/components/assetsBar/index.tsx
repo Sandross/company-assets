@@ -127,8 +127,10 @@ export const AssetsBar: React.FC = () => {
   return (
     <div className={styles.assetsBar}>
       <div className={styles.tree}>
-        <h2 className={styles.title}>Ativos/</h2>
-        <span>{currCompanyName}</span>
+        <div className={styles.textContainer}>
+          <h2 className={styles.title}>Ativos /</h2>
+          <h3 className={styles.title}>{currCompanyName}</h3>
+        </div>
         <SearchInput searchedValue="" />
   
         <ul className={styles.tree}>
