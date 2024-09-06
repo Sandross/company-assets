@@ -1,6 +1,7 @@
 @import '../../styles/mixins';
 
-.login{
+.login {
     min-height: 100vh;
+    background: linear-gradient(135deg, #282c34, #1a1f25);
     @include flexAlignment;
 }
