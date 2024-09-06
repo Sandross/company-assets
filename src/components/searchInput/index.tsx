@@ -3,7 +3,7 @@ import { ISearchInputProps } from '../../interfaces';
 import { useDebounce } from '../../hooks';
 import { useDispatch } from 'react-redux';
 import { setSearchQuery, toggleEnergySensorsFilter, toggleCriticalStatusFilter } from '../../redux/reducers/assets';
-
+import styles from './style.module.scss';
 export const SearchInput = ({ searchedValue }: ISearchInputProps) => {
   const [search, setSearch] = useState(searchedValue || '');
   const [filterEnergy, setFilterEnergy] = useState(false);
@@ -26,7 +26,7 @@ export const SearchInput = ({ searchedValue }: ISearchInputProps) => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <input
         type="text"
         placeholder="Search components/assets/locations..."

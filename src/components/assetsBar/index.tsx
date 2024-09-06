@@ -9,7 +9,6 @@ import { SearchInput } from '../searchInput';
 import AssetTable from '../assetTable';
 import Loading from '../loading';
 import Error from '../error';
-
 const ITEMS_PER_PAGE = 10;
 
 export const AssetsBar: React.FC = () => {

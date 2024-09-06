@@ -1,0 +1,6 @@
+@import '../../styles/mixins';
+
+.container{
+    @include flexAlignment(column, flex-start, flex-start);
+    gap: 1rem;
+}
