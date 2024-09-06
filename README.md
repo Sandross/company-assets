@@ -6,11 +6,10 @@ Este projeto, chamado **Tractian Company Assets**, foi desenvolvido para otimiza
 
 ## Ferramentas e Tecnologias Utilizadas
 
-### 1. **Husky com Commitlint e Lint-Staged**
-Implementei o **Husky** para automatizar hooks do Git, como `pre-commit`, garantindo a execução de scripts de linting antes de cada commit. Além disso:
+### 1. **AWS**
+O deploy da aplicação foi feito utilizando o **AWS Amplify**, que facilita a implementação contínua e integrações com serviços AWS, além de automatizar o processo de CI/CD (Integração e Entrega Contínuas), garantindo uma pipeline de deploy confiável e eficiente.
 
-- **Commitlint**: Assegura que as mensagens de commit sigam o padrão **Conventional Commits**, garantindo consistência no histórico de commits.
-- **Lint-Staged**: Faz o linting apenas dos arquivos modificados, melhorando a eficiência nas verificações de código.
+A aplicação está disponível neste link: [Acessar aplicação](https://main.d2lkjvhvc510nq.amplifyapp.com/).
 
 ### 2. **Axios para Requests à API**
 Utilizei o **Axios** para realizar as requisições à API. Ele proporciona uma interface mais simples para gerenciar requisições HTTP assíncronas, incluindo interceptação de respostas para tratamento de erros e configuração global de headers.
@@ -36,10 +35,11 @@ Implementei uma classe **ErrorBoundary** para capturar erros que não são trata
 ### 8. **useMemo e useCallback para Melhorar a Performance**
 Utilizei os hooks **useMemo** e **useCallback** para otimizar a renderização de componentes, evitando cálculos e recriações desnecessárias de funções em cada renderização. Isso melhora a performance, especialmente em componentes que realizam operações pesadas ou dependem de callbacks constantes.
 
-### 9. **AWS**
-O deploy da aplicação foi feito utilizando o **AWS Amplify**, que facilita a implementação contínua e integrações com serviços AWS, além de automatizar o processo de CI/CD (Integração e Entrega Contínuas), garantindo uma pipeline de deploy confiável e eficiente.
+### 9. **Husky com Commitlint e Lint-Staged**
+Implementei o **Husky** para automatizar hooks do Git, como `pre-commit`, garantindo a execução de scripts de linting antes de cada commit. Além disso:
 
-A aplicação está disponível neste link: [Acessar aplicação](https://main.d2lkjvhvc510nq.amplifyapp.com/).
+- **Commitlint**: Assegura que as mensagens de commit sigam o padrão **Conventional Commits**, garantindo consistência no histórico de commits.
+- **Lint-Staged**: Faz o linting apenas dos arquivos modificados, melhorando a eficiência nas verificações de código.
 
 ### 10. **Paginação Customizada para Melhorar a Performance**
 Implementei um sistema de paginação customizada para melhorar a performance nas requisições e na renderização de grandes volumes de dados. A paginação divide as requisições em blocos menores, permitindo que a API envie apenas as informações necessárias para cada página. Dessa forma, reduzo o tempo de carregamento e evito sobrecarregar a interface com dados desnecessários, otimizando a experiência do usuário.
