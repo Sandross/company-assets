@@ -44,6 +44,13 @@ A aplicação está disponível neste link: [Acessar aplicação](https://main.d
 ### 10. **Paginação Customizada para Melhorar a Performance**
 Implementei um sistema de paginação customizada para melhorar a performance nas requisições e na renderização de grandes volumes de dados. A paginação divide as requisições em blocos menores, permitindo que a API envie apenas as informações necessárias para cada página. Dessa forma, reduzo o tempo de carregamento e evito sobrecarregar a interface com dados desnecessários, otimizando a experiência do usuário.
 
+### 11. **Yup com React Hook Form para Validação de Formulários**
+Para garantir uma validação eficaz e simples dos formulários, utilizei o **Yup** em conjunto com o **React Hook Form**. Essa combinação permite:
+
+- **Validação declarativa**: O Yup facilita a criação de esquemas de validação declarativos, o que torna o código mais legível e fácil de manter.
+- **Melhoria na experiência do usuário**: O React Hook Form otimiza a performance de formulários ao evitar renderizações desnecessárias, garantindo uma experiência suave.
+- **Feedback imediato ao usuário**: Com a integração do Yup, é possível fornecer mensagens de erro em tempo real, à medida que o usuário preenche os campos do formulário.
+
 ## Instalação e Configuração
 1. Clone o repositório: `git clone https://github.com/Sandross/tractian-company-assets.git`
 2. Instale as dependências: `npm install`

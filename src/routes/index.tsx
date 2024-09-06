@@ -11,7 +11,7 @@ const Routes: React.FC = () => {
     <Router>
       <Provider store={store}>
         <Routers>
-          <Route path="/" element={!accessToken ? <Home/> : <Login/>} />
+          <Route path="/" element={accessToken ? <Home/> : <Login/>} />
         </Routers>
       </Provider>
     </Router>

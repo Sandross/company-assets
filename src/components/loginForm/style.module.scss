@@ -1,0 +1,61 @@
+@import '../../styles/mixins';
+
+$background-color: #17192d;
+$input-background: #1f2139;
+$input-border-color: #3a3d5e;
+$button-background: #ffdd57;
+$button-hover: #e6c347;
+$text-color: #ffffff;
+$error-color: #ff4d4d;
+
+.loginCard {
+  @include flexAlignment(column, center, center);
+  @include size(350px, 450px);
+  background-color: $background-color;
+  border: 1px solid $input-border-color;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  color: $text-color;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.inputContainer {
+  width: 100%;
+  margin-bottom: 15px;
+
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $input-border-color;
+    border-radius: 5px;
+    background-color: $input-background;
+    color: $text-color;
+
+    &::placeholder {
+      color: lighten($text-color, 20%);
+    }
+  }
+
+  .error {
+    color: $error-color;
+    font-size: 12px;
+  }
+}
+
+.loginButton {
+  @include size(100%, 40px);
+  background-color: $button-background;
+  color: $background-color;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: $button-hover;
+  }
+}

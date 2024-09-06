@@ -1,0 +1,6 @@
+@import '../../styles/mixins';
+
+.login{
+    min-height: 100vh;
+    @include flexAlignment;
+}

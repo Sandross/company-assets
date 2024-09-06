@@ -61,3 +61,8 @@ export interface IAssetTableProps {
 export interface IErrorProps {
     message: string;
 }
+
+export interface ILoginForm {
+    email: string;
+    password: string;
+}
