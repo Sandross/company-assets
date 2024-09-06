@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# Projeto: Tractian Company Assets
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição
 
-Currently, two official plugins are available:
+Este projeto, chamado **Tractian Company Assets**, foi desenvolvido para otimizar o gerenciamento de ativos da empresa, utilizando diversas tecnologias modernas para garantir uma aplicação robusta, performática e de fácil manutenção.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Ferramentas e Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+### 1. **Husky com Commitlint e Lint-Staged**
+Implementei o **Husky** para automatizar hooks do Git, como `pre-commit` e `pre-push`, garantindo a execução de scripts de linting antes de cada commit. Além disso:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Commitlint**: Assegura que as mensagens de commit sigam o padrão **Conventional Commits**, garantindo consistência no histórico de commits.
+- **Lint-Staged**: Faz o linting apenas dos arquivos modificados, melhorando a eficiência nas verificações de código.
 
-- Configure the top-level `parserOptions` property like this:
+### 2. **Axios para Requests à API**
+Utilizei o **Axios** para realizar as requisições à API. Ele proporciona uma interface mais simples para gerenciar requisições HTTP assíncronas, incluindo interceptação de respostas para tratamento de erros e configuração global de headers.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 3. **Sass para Estilização**
+A estilização do projeto foi feita com **Sass**, que facilita a modularização e manutenção dos estilos. Alguns dos benefícios incluem:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Mixins**: Reutilizo blocos de código CSS através de mixins, o que proporciona consistência e evita repetição de código.
+- **Variáveis**: Garantem uma uniformidade visual em toda a aplicação, especialmente para cores e espaçamentos.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### 4. **Redux para Gerenciamento de Estado**
+Implementei **Redux** para gerenciar o estado global da aplicação de maneira eficiente. Utilizei **Redux Thunk** para lidar com ações assíncronas, permitindo uma maior flexibilidade e abstração na lógica de interação com a API.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### 5. **Hook Personalizado de Debounce**
+Criei um **hook personalizado de debounce** para otimizar as requisições à API, evitando chamadas excessivas enquanto o usuário digita. Isso melhora a performance e a experiência do usuário ao reduzir a carga de requisições desnecessárias.
+
+### 6. **Conventional Commits**
+Adotei o padrão de **Conventional Commits** para manter o histórico de commits claro e semântico. Isso facilita a rastreabilidade de mudanças e auxilia na geração automatizada de changelogs.
+
+### 7. **Error Boundary**
+Implementei uma classe **ErrorBoundary** para capturar erros que não são tratados por blocos `try/catch`, garantindo que a aplicação continue funcionando mesmo em cenários de erro inesperado.
+
+### 8. **useMemo e useCallback para Melhorar a Performance**
+Utilizei os hooks **useMemo** e **useCallback** para otimizar a renderização de componentes, evitando cálculos e recriações desnecessárias de funções em cada renderização. Isso melhora a performance, especialmente em componentes que realizam operações pesadas ou dependem de callbacks constantes.
+
+### 9. **Serviços AWS e AWS Amplify**
+O deploy da aplicação foi feito utilizando o **AWS Amplify**, que facilita a implementação contínua e integrações com serviços AWS. Utilizei **GitHub Actions** para automatizar o processo de CI/CD (Integração e Entrega Contínuas), garantindo uma pipeline de deploy confiável e eficiente.
+
+A aplicação está disponível neste link: [Acessar aplicação](https://main.d2lkjvhvc510nq.amplifyapp.com/).
+
+## Instalação e Configuração
+1. Clone o repositório: git clone https://github.com/Sandross/tractian-company-assets.git
+2. Instale as dependências: npm install
+3. Execute a aplicação: npm run dev
