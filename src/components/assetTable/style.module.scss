@@ -1,0 +1,58 @@
+@import '../../styles/mixins';
+
+.assetContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  color: #343a40;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @include flexAlignment(column, flex-start, flex-start);
+  gap: 20px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #6c757d;
+    margin-top: 10px;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+
+  .detailRow {
+    @include flexAlignment(row, space-between, center);
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+
+    .label {
+      font-size: 16px;
+      font-weight: bold;
+      color: #6c757d;
+    }
+
+    .value {
+      font-size: 16px;
+      color: #343a40;
+    }
+  }
+  
+  .statusIcon {
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+  }
+}

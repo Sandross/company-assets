@@ -39,6 +39,9 @@ export interface IRenderTreeItem{
     parentId?: string | null;
     locationId?: string | null;
     sensorType?: string | null;
+    node?: IRenderTreeItem[];
+    status?: string;
+    type?: string;
   }
 
 export interface IAssetImageObject{
@@ -52,7 +55,7 @@ export interface ISearchInputProps {
 }
 
 export interface IAssetTableProps {
-    selectedNode: IRenderTreeItem | null;
+    selectedNode: Partial<IRenderTreeItem> | null
 }
 
 export interface IErrorProps {

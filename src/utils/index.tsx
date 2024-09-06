@@ -11,7 +11,7 @@ export const AssetsImageObject: Record<string, string> = {
 
 export const applyFilters = (state: AssetsState) => {
   let filteredAssets = state.assets;
-
+  
   if (state.searchQuery) {
     filteredAssets = filteredAssets.filter((asset) =>
       asset.name.toLowerCase().includes(state.searchQuery.toLowerCase())

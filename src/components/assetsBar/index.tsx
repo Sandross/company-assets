@@ -9,6 +9,10 @@ import { SearchInput } from '../searchInput';
 import AssetTable from '../assetTable';
 import Loading from '../loading';
 import Error from '../error';
+import greenCircleIcon from '../../assets/elipseVerde.png';
+import redCircleIcon from '../../assets/elipseVermelha.png';
+import lightningIcon from '../../assets/bolt.png'; 
+
 const ITEMS_PER_PAGE = 10;
 
 export const AssetsBar: React.FC = () => {
@@ -56,12 +60,29 @@ export const AssetsBar: React.FC = () => {
     [locations]
   );
 
+  const rootAssets = useMemo(
+    () => filteredAssets?.filter((asset) => !asset.parentId && !asset.locationId),
+    [filteredAssets]
+  );
+
   const renderAssetTree = useCallback(
     (locationId: string | null, parentAssetId?: string | null) => {
-      const assetItems = filteredAssets?.filter((asset) => asset.locationId === locationId || asset.parentId === parentAssetId);
+      const assetItems = filteredAssets?.filter((asset) => {
+        if (!asset.parentId && !asset.locationId) return false;
+        return asset.locationId === locationId || asset.parentId === parentAssetId;
+      });
+
       return assetItems?.map((asset) => {
         const isExpanded = expandedNodes[asset.id];
         const hasChildren = filteredAssets?.some((child) => child.parentId === asset.id);
+
+        let statusIcon;
+        if (asset.sensorType === 'energy') {
+          statusIcon = lightningIcon;
+        } else {
+          statusIcon = asset.status === 'operating' ? greenCircleIcon : redCircleIcon;
+        }
+
         return (
           <li key={asset.id} className={styles.treeItem}>
             <div className={styles.treeLabel} onClick={() => toggleNode(asset.id, asset)}>
@@ -73,6 +94,7 @@ export const AssetsBar: React.FC = () => {
                 )}
               </span>
               {asset.name}
+              <img src={statusIcon} alt={asset.status} className={styles.statusIcon} />
             </div>
   
             {isExpanded && hasChildren && (
@@ -121,7 +143,7 @@ export const AssetsBar: React.FC = () => {
     setCurrentPage(newPage);
   };
 
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
   if (error) return <Error message={error} />;
 
   return (
@@ -151,6 +173,39 @@ export const AssetsBar: React.FC = () => {
               )}
             </li>
           ))}
+
+          {rootAssets?.map((asset) => {
+            const isExpanded = expandedNodes[asset.id];
+            const hasChildren = filteredAssets?.some((child) => child.parentId === asset.id);
+            let statusIcon;
+            if (asset.sensorType === 'energy') {
+              statusIcon = lightningIcon; 
+            } else {
+              statusIcon = asset.status === 'operating' ? greenCircleIcon : redCircleIcon;
+            }
+
+            return (
+              <li key={asset.id} className={styles.treeItem}>
+                <div className={styles.treeLabel} onClick={() => toggleNode(asset.id, asset)}>
+                  <span className={styles.icon}>
+                    {asset.sensorType ? (
+                      <img src={AssetsImageObject['component']} alt="Component" />
+                    ) : (
+                      <img src={AssetsImageObject['asset']} alt="Asset" />
+                    )}
+                  </span>
+                  {asset.name}
+                  <img src={statusIcon} alt={asset.status} className={styles.statusIcon} />
+                </div>
+      
+                {isExpanded && hasChildren && (
+                  <ul className={styles.treeChildren}>
+                    {renderAssetTree(null, asset.id)}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
         </ul>
   
         <div className={styles.pagination}>
