@@ -4,6 +4,11 @@
 
 Este projeto, chamado **Tractian Company Assets**, foi desenvolvido para otimizar o gerenciamento de ativos da empresa, utilizando diversas tecnologias modernas para garantir uma aplicação robusta, performática e de fácil manutenção.
 
+
+## Link do Vídeo:
+
+https://www.youtube.com/watch?v=ykQP4mIwTXM
+
 ## Ferramentas e Tecnologias Utilizadas
 
 ### 1. **AWS**
