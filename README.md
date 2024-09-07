@@ -51,6 +51,12 @@ Para garantir uma validação eficaz e simples dos formulários, utilizei o **Yu
 - **Melhoria na experiência do usuário**: O React Hook Form otimiza a performance de formulários ao evitar renderizações desnecessárias, garantindo uma experiência suave.
 - **Feedback imediato ao usuário**: Com a integração do Yup, é possível fornecer mensagens de erro em tempo real, à medida que o usuário preenche os campos do formulário.
 
+#### Credenciais de Acesso
+Utilize as seguintes credenciais para acessar o sistema:
+
+- **Email**: `tractian@admin.com`
+- **Senha**: `admin`
+
 ## Instalação e Configuração
 1. Clone o repositório: `git clone https://github.com/Sandross/tractian-company-assets.git`
 2. Instale as dependências: `npm install`

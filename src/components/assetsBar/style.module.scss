@@ -1,4 +1,5 @@
 @import '../../styles/mixins';
+
 .assetsBar {
     display: flex;
     flex-direction: row;
@@ -30,7 +31,7 @@
         justify-content: flex-start;
         overflow-y: auto;
     }
-    
+
     .title {
         font-size: 24px;
         font-weight: bold;
@@ -218,6 +219,43 @@
         width: 9px;
         height: 9px;
         margin-left: 8px;
-      }
-      
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 10px;
+
+        .tree {
+            flex-basis: 100%;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            flex-basis: 100%;
+        }
+
+        .title {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .pagination {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pagination button {
+            width: 100%;
+        }
+
+        input[type='text'] {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .assetDetails {
+            padding: 8px;
+        }
+    }
 }
