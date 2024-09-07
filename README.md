@@ -76,5 +76,5 @@ Implementaria um **DNS permanente** para a aplicação, garantindo que o endere�
 ### 4. **Aprimorar o Layout Mobile**
 O layout mobile poderia ser refinado, garantindo uma melhor experiência do usuário em dispositivos móveis. Isso incluiria otimizações para diferentes tamanhos de tela e ajustes de design responsivo para garantir uma navegação mais fluida.
 
-### 5. ** Implementação do React Window para Renderização de Grandes Listas**
+### 5. **Implementação do React Window para Renderização de Grandes Listas**
 Para melhorar ainda mais a performance ao lidar com grandes volumes de dados, planejo implementar o React Window. Essa biblioteca permitirá a renderização apenas dos itens visíveis na tela, otimizando o uso de memória e reduzindo o tempo de carregamento, garantindo uma rolagem suave e uma experiência de usuário mais rápida e responsiva, mesmo com listas extensas.
