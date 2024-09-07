@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IAssetTableProps } from '../../interfaces';
 import styles from './style.module.scss';
 import bolt from '../../assets/bolt.png';
 const AssetTable: React.FC<IAssetTableProps> = ({ selectedNode }) => {
-  useEffect(() => {
-    console.log(selectedNode);
-  }, [selectedNode]);
 
   return (
     <div className={styles.assetContainer}>

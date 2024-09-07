@@ -55,3 +55,20 @@ Para garantir uma validação eficaz e simples dos formulários, utilizei o **Yu
 1. Clone o repositório: `git clone https://github.com/Sandross/tractian-company-assets.git`
 2. Instale as dependências: `npm install`
 3. Execute a aplicação: `npm run dev`
+
+## Melhorias Futuras
+
+### 1. **Testes Unitários com Jest**
+Com mais tempo, eu adicionaria testes unitários utilizando **Jest** para garantir a qualidade do código e prevenir regressões. Isso ajudaria a identificar rapidamente possíveis falhas em funcionalidades críticas.
+
+### 2. **Melhor Componentização**
+Melhoraria a componentização do projeto, dividindo componentes grandes em unidades menores e mais reutilizáveis. Isso facilitaria a manutenção e o entendimento do código, além de melhorar a legibilidade e a escalabilidade da aplicação.
+
+### 3. **Configurar um DNS Permanente**
+Implementaria um **DNS permanente** para a aplicação, garantindo que o endereço seja mais amigável e fácil de memorizar. Isso também melhoraria a confiabilidade do acesso à aplicação, evitando possíveis problemas com links temporários.
+
+### 4. **Aprimorar o Layout Mobile**
+O layout mobile poderia ser refinado, garantindo uma melhor experiência do usuário em dispositivos móveis. Isso incluiria otimizações para diferentes tamanhos de tela e ajustes de design responsivo para garantir uma navegação mais fluida.
+
+### 5. ** Implementação do React Window para Renderização de Grandes Listas**
+Para melhorar ainda mais a performance ao lidar com grandes volumes de dados, planejo implementar o React Window. Essa biblioteca permitirá a renderização apenas dos itens visíveis na tela, otimizando o uso de memória e reduzindo o tempo de carregamento, garantindo uma rolagem suave e uma experiência de usuário mais rápida e responsiva, mesmo com listas extensas.

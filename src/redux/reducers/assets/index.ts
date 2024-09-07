@@ -8,6 +8,7 @@ const initialState: AssetsState = {
   locations: [],
   assets: [],
   filteredAssets: [],
+  filteredLocations: [],
   searchQuery: '',
   filterByEnergySensors: false,
   filterByCriticalStatus: false,
@@ -53,11 +54,13 @@ const assetsSlice = createSlice({
       .addCase(fetchLocationsByCompanyId.pending, (state) => {
         state.loading = true;
         state.error = null;
+        applyFilters(state);
       })
-      //@ts-expect-error state
+    //@ts-expect-error state
       .addCase(fetchLocationsByCompanyId.fulfilled, (state, action: PayloadAction<Location[]>) => {
         state.loading = false;
         state.locations = action.payload;
+        applyFilters(state);
       })
       .addCase(fetchLocationsByCompanyId.rejected, (state, action) => {
         state.loading = false;
@@ -66,6 +69,7 @@ const assetsSlice = createSlice({
       .addCase(fetchAssetsByCompanyId.pending, (state) => {
         state.loading = true;
         state.error = null;
+        applyFilters(state);
       })
       .addCase(fetchAssetsByCompanyId.fulfilled, (state, action: PayloadAction<Asset[]>) => {
         state.loading = false;

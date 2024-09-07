@@ -27,6 +27,7 @@ export interface AssetsState {
     loading: boolean;
     error: string | null;
     filteredAssets: Asset[];
+    filteredLocations: Location[];
     searchQuery: string;
     filterByEnergySensors: boolean;
     filterByCriticalStatus: boolean;

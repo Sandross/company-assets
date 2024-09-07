@@ -1,3 +1,4 @@
+
 import React, { useEffect, useCallback, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCompanies, fetchLocationsByCompanyId, fetchAssetsByCompanyId } from '../../redux/slices';
@@ -11,7 +12,7 @@ import Loading from '../loading';
 import Error from '../error';
 import greenCircleIcon from '../../assets/elipseVerde.png';
 import redCircleIcon from '../../assets/elipseVermelha.png';
-import lightningIcon from '../../assets/bolt.png'; 
+import lightningIcon from '../../assets/bolt.png';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -96,7 +97,7 @@ export const AssetsBar: React.FC = () => {
               {asset.name}
               <img src={statusIcon} alt={asset.status} className={styles.statusIcon} />
             </div>
-  
+
             {isExpanded && hasChildren && (
               <ul className={styles.treeChildren}>
                 {renderAssetTree(null, asset.id)}
@@ -108,7 +109,7 @@ export const AssetsBar: React.FC = () => {
     },
     [filteredAssets, expandedNodes, toggleNode]
   );
-  
+
   const renderLocationTree = useCallback(
     (parentLocationId: string | null) => {
       const locationItems = locations?.filter((location) => location.parentId === parentLocationId);
@@ -122,7 +123,7 @@ export const AssetsBar: React.FC = () => {
               </span>
               {location.name}
             </div>
-  
+
             {isExpanded && (
               <ul className={styles.treeChildren}>
                 {renderLocationTree(location?.id)}
@@ -154,7 +155,7 @@ export const AssetsBar: React.FC = () => {
           <h3 className={styles.title}>{currCompanyName}</h3>
         </div>
         <SearchInput searchedValue="" />
-  
+
         <ul className={styles.tree}>
           {paginatedLocations?.map((location) => (
             <li key={location.id} className={styles.treeItem}>
@@ -164,7 +165,7 @@ export const AssetsBar: React.FC = () => {
                 </span>
                 {location.name}
               </div>
-  
+
               {expandedNodes[location.id] && (
                 <ul className={styles.treeChildren}>
                   {renderLocationTree(location.id)}
@@ -179,7 +180,7 @@ export const AssetsBar: React.FC = () => {
             const hasChildren = filteredAssets?.some((child) => child.parentId === asset.id);
             let statusIcon;
             if (asset.sensorType === 'energy') {
-              statusIcon = lightningIcon; 
+              statusIcon = lightningIcon;
             } else {
               statusIcon = asset.status === 'operating' ? greenCircleIcon : redCircleIcon;
             }
@@ -197,7 +198,7 @@ export const AssetsBar: React.FC = () => {
                   {asset.name}
                   <img src={statusIcon} alt={asset.status} className={styles.statusIcon} />
                 </div>
-      
+
                 {isExpanded && hasChildren && (
                   <ul className={styles.treeChildren}>
                     {renderAssetTree(null, asset.id)}
@@ -207,13 +208,13 @@ export const AssetsBar: React.FC = () => {
             );
           })}
         </ul>
-  
+
         <div className={styles.pagination}>
           <button onClick={() => handlePageChange(Math.max(currentPage - 1, 1))} disabled={currentPage === 1}>
-            Previous Page
+                        Previous Page
           </button>
           <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-            Next Page
+                        Next Page
           </button>
         </div>
       </div>

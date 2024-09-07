@@ -16,46 +16,46 @@ $error-color: #ff4d4d;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   color: $text-color;
-}
-
-.logo {
-  width: 150px;
-  margin-bottom: 20px;
-}
-
-.inputContainer {
-  width: 100%;
-  margin-bottom: 15px;
-
-  .input {
+  .logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .inputContainer {
     width: 100%;
-    padding: 10px;
-    border: 1px solid $input-border-color;
+    margin-bottom: 15px;
+  
+    .input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $input-border-color;
+      border-radius: 5px;
+      background-color: $input-background;
+      color: $text-color;
+  
+      &::placeholder {
+        color: lighten($text-color, 20%);
+      }
+    }
+  
+    .error {
+      color: $error-color;
+      font-size: 12px;
+    }
+  }
+  
+  .loginButton {
+    @include size(100%, 40px);
+    background-color: $button-background;
+    color: $background-color;
+    border: none;
     border-radius: 5px;
-    background-color: $input-background;
-    color: $text-color;
-
-    &::placeholder {
-      color: lighten($text-color, 20%);
+    cursor: pointer;
+    font-size: 16px;
+  
+    &:hover {
+      background-color: $button-hover;
     }
   }
 
-  .error {
-    color: $error-color;
-    font-size: 12px;
-  }
-}
-
-.loginButton {
-  @include size(100%, 40px);
-  background-color: $button-background;
-  color: $background-color;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-
-  &:hover {
-    background-color: $button-hover;
-  }
-}
+}  

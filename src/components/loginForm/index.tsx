@@ -21,6 +21,7 @@ const LoginForm: React.FC = () => {
       if (data.email === 'tractian@admin.com' && data.password === 'admin') {
         localStorage.setItem('accessToken', '123456');
         setLoading(false);
+        window.location.reload();
       } else {
         setLoading(false);
         setError('Invalid email or password');
