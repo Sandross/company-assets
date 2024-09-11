@@ -1,8 +1,8 @@
-# Projeto: Tractian Company Assets
+# Projeto: Company Assets
 
 ## Descrição
 
-Este projeto, chamado **Tractian Company Assets**, foi desenvolvido para otimizar o gerenciamento de ativos da empresa, utilizando diversas tecnologias modernas para garantir uma aplicação robusta, performática e de fácil manutenção.
+Este projeto, chamado **Company Assets**, foi desenvolvido para otimizar o gerenciamento de ativos da empresa, utilizando diversas tecnologias modernas para garantir uma aplicação robusta, performática e de fácil manutenção.
 
 
 ## Link do Vídeo:
@@ -63,7 +63,7 @@ Utilize as seguintes credenciais para acessar o sistema:
 - **Senha**: `admin`
 
 ## Instalação e Configuração
-1. Clone o repositório: `git clone https://github.com/Sandross/tractian-company-assets.git`
+1. Clone o repositório: `git clone https://github.com/Sandross/company-assets.git`
 2. Instale as dependências: `npm install`
 3. Execute a aplicação: `npm run dev`
 
